@@ -1,0 +1,44 @@
+﻿@model ToDoListTask.Models.ToDoList
+
+<form asp-action="AddToDo" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <div class="col-12">
+        <input type="hidden" asp-for="Id" />
+
+       <div class="mb-3">
+
+                <label asp-for="Title" class="form-label">Add Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Enter title" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+
+       </div>
+
+            <div class="mb-3">
+        <label asp-for="Discreption" class="form-label">Add Discreption</label>
+        <input asp-for="Discreption" class="form-control" required />
+        <span asp-validation-for="Discreption" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+        <label asp-for="Deadline" class="form-label">Deadline</label>
+        <input asp-for="Deadline"  type="datetime-local" class="form-control" required />
+        <span asp-validation-for="Deadline" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+        <label for="File" class="form-label">Add File</label>
+        <input type="file" asp-for="File" name="uploadFile" class="form-control" />
+        <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Add Todo</button>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

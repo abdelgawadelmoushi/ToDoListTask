@@ -1,0 +1,26 @@
+﻿@model ToDoListTask.Models.ToDoList
+
+<form asp-for="Delete" method="post">
+    <div class="mb-3">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Id" value="@ViewBag.Id" />
+
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" placeholder="Enter patient name" required />
+        <span class="text-danger" asp-validation-for="Title" class="text-danger"></span>
+
+        <label asp-for="Discreption" class="form-label">Discreption</label>
+        <input asp-for="Discreption" type="date" class="form-control" required />
+        <span asp-validation-for="Discreption" class="text-danger"></span>
+
+        <label asp-for="Deadline" class="form-label">Deadline</label>
+        <input asp-for="Deadline" type="datetime" class="form-control" required />
+        <span asp-validation-for="Deadline" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Delete Appointment</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
