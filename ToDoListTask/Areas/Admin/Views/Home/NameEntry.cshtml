@@ -1,4 +1,58 @@
-﻿
+﻿    <link rel="stylesheet" href="site.css">
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="stylesheet" href="site.css">
+
+        <style>
+            body {
+                background-image: url('/img/3072185.jpg'); /* مسار الصورة */
+                background-size: cover; /* تملأ الشاشة */
+                background-position: center; /* تتوسّط */
+                background-repeat: no-repeat; /* ما تتكررش */
+                height: 100vh; /* ارتفاع الشاشة بالكامل */
+            }
+
+            .card {
+                background-color: rgba(255, 255, 255, 0.8); /* لون أبيض شفاف للكارت */
+                margin: 10px auto;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                border-radius: 15px;
+            }
+        </style>
+        <title>Home</title>
+    </head>
+
+    <body>
+        <form asp-action="NameEntry" method="post">
+        <div class="container align-items-center">
+            <div class="card" style="width: 30rem;">
+                <img src="~/img/3072185.jpg" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+
+
+                        <label for="Name" class="form-label">Enter Your Name</label>
+                        <input type="text" name="Name" class="form-control" id="Name">
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                </div>
+            </div>
+
+        </form>
+
+    </body>
+</html>
+
+
+@* 
 <form asp-action="NameEntry" method="post">
     <div class="mb-3">
 
@@ -10,7 +64,7 @@
 
     <button type="submit"   class="btn btn-primary">Submit</button>
 
-</form>
+</form> *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
