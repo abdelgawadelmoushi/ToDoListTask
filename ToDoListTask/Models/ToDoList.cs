@@ -8,10 +8,10 @@ namespace ToDoListTask.Models
         public int Id { get; set; }
 
 
-        [Required , CustomLength]
+        [Required , CustomLength(5,50)]
         public string Title { get; set; }=string.Empty;
 
-        [CustomLength]
+        [CustomLength(5,150)]
         public string Discreption { get; set; } = string.Empty;
         public string File { get; set; } = "default.txt";
 
