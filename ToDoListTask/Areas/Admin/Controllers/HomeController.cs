@@ -42,6 +42,8 @@ namespace ToDoListTask.Areas.Admin.Controllers
 
             Response.Cookies.Append("UserName", Name, options);
 
+
+
             return RedirectToAction("ToDoList", "ToDo", new { area = "Admin" });
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

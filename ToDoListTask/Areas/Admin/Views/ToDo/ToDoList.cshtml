@@ -9,64 +9,119 @@
     </div>
 }
 
+
 <div class="container">
 
     <div class="row">
-        <table class="table table-dark table-striped" >
+        <table class="table table-dark table-striped">
             <thead>
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">DeadLine</th>
                     <th scope="col">File</th>
-                    <th scope="col" >Action</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-              @foreach (var item in Model)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td>@item.Title</td>
                         <td>@item.Discreption</td>
                         <td>@item.Deadline.ToString("yyyy-MM-dd HH:mm")</td>
-                   
+
                         <td class="font-monospace">
                             @if (!string.IsNullOrEmpty(item.File))
                             {
                                 <a href="~/Files/ToDos_Files/@item.File" target="_blank" class="btn btn-sm btn-info">View</a>
                                 <a asp-area="Admin" asp-controller="ToDo" asp-action="DownloadFile" asp-route-id="@item.Id"
                                    class="btn btn-sm btn-success"> Download </a>
-                                                    }
+                            }
                             else
                             {
                                 <span>No File</span>
                             }
                         </td>
 
-                     
+
                         <td>
                             <a href="/Admin/ToDo/Edit/@item.Id" type="button" class="btn btn-warning">Edit</a>
                             <a href="/Admin/ToDo/Delete/@item.Id" class="btn btn-danger btn-delete">Delete</a>
-                           
-                         </td>
+
+                        </td>
                     </tr>
                 }
-             
+
             </tbody>
         </table>
-      
+
     </div>
 
 </div>
-<script>
-    window.addEventListener("DOMContentLoaded", function () {
-        const notification = document.getElementById("notification");
-        if (notification) {
-            setTimeout(() => {
-                notification.style.transition = "opacity 0.5s ease";
-                notification.style.opacity = "0";
-                setTimeout(() => notification.remove(), 500);
-            }, 6000); // 6 seconds
-        }
-    });
-</script>
+@section Scripts {
+
+    @*     <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            const notification = document.getElementById("notification");
+            if (notification) {
+                setTimeout(() => {
+                    notification.style.transition = "opacity 0.5s ease";
+                    notification.style.opacity = "0";
+                    setTimeout(() => notification.remove(), 500);
+                }, 6000); // 6 seconds
+            }
+        });
+    </script> *@
+    @if (@TempData["success-notification"] is not null)
+    {
+        <script>
+
+                        toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+                        toastr.success('@TempData["success-notification"]')
+
+        </script>
+    }
+    else if (TempData["error-notification"] is not null)
+    {
+        <script>
+
+                        toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+                toastr.success('@TempData["error-notification"]')
+        </script>
+    }
+
+
+}

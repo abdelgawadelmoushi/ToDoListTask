@@ -41,6 +41,72 @@
 
 </form>
 
-@section Scripts {
+@* @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+ *@
+
+        @section Scripts {
+
+    @*     <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            const notification = document.getElementById("notification");
+            if (notification) {
+                setTimeout(() => {
+                    notification.style.transition = "opacity 0.5s ease";
+                    notification.style.opacity = "0";
+                    setTimeout(() => notification.remove(), 500);
+                }, 6000); // 6 seconds
+            }
+        });
+    </script> *@
+    @if (@TempData["success-notification"] is not null)
+    {
+        <script>
+
+                        toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+                        toastr.success('@TempData["success-notification"]')
+
+        </script>
+    }
+    else if (TempData["error-notification"] is not null)
+    {
+        <script>
+
+                        toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+                toastr.error('@TempData["error-notification"]')
+        </script>
+    }
+    }

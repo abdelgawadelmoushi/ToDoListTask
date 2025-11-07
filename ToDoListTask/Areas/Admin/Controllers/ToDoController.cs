@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDoListTask.Models;
 using ToDoListTask.Models.EntityConfigration;
+using ToDoListTask.Validations;
 
 namespace ToDoListTask.Areas.Admin.Controllers
 {
@@ -29,7 +30,6 @@ namespace ToDoListTask.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddToDo()
         {
-            TempData["Message"] = "✅ Todo added successfully!";
 
             return View(new ToDoList());
         }
@@ -40,8 +40,16 @@ namespace ToDoListTask.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData["error-notification"] = "Invalid Data";
                 return View(toDoList);
             }
+                //fluent Validation 
+            //    ToDoListValidator validationRule = new ToDoListValidator();
+            //var result = validationRule.Validate(toDoList);
+            //if (!result.IsValid)
+            //{
+            //    return View(toDoList);
+            //}
 
             if (uploadFile is not null && uploadFile.Length > 0)
             {
@@ -57,6 +65,9 @@ namespace ToDoListTask.Areas.Admin.Controllers
           
             _context.Add(toDoList);
             _context.SaveChanges();
+
+            TempData["success-notification"] = "Added toDo Successfully";
+
             return RedirectToAction("ToDoList", "ToDo");
         }
         public IActionResult DownloadFile(int id)
@@ -101,6 +112,9 @@ namespace ToDoListTask.Areas.Admin.Controllers
         {
             _context.toDoLists.Update(toDoList);
             _context.SaveChanges();
+
+            TempData["success-notification"] = "Edited toDo Successfully";
+
             return RedirectToAction("ToDoList", "ToDo");
         }
 
@@ -114,6 +128,8 @@ namespace ToDoListTask.Areas.Admin.Controllers
             }
             _context.toDoLists.Remove(toDoList);
             _context.SaveChanges();
+            TempData["success-notification"] = "Deleted toDo Successfully";
+
             return RedirectToAction("ToDoList", "ToDo");
         }
     }

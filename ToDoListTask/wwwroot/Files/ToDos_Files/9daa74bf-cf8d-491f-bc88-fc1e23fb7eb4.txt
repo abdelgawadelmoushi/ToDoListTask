@@ -1,0 +1,41 @@
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    base.OnConfiguring(optionsBuilder);
+
+    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=EFProject522;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+}
+
+--------------------
+
+<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+----------------
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
+      {
+          base.OnModelCreating(modelBuilder);
+          modelBuilder.ApplyConfigurationsFromAssembly(typeof(SubImgCourseEntityTypeConfigrations).Assembly);
+          foreach (var relationship in modelBuilder.Model.GetEntityTypes()
+
+              // for many to many relation
+  .SelectMany(e => e.GetForeignKeys()))
+          {
+              relationship.DeleteBehavior = DeleteBehavior.NoAction;
+          }
+      }
+=========
+internal class ApplicationDbcontext : DbContext 
+
+public DbSet <Model> models { get; set; }
+
+add-migration AddAgeModel — update-database  ——- get-migration
+
+CTRL K S to make Region
+
+Scaffold-DbContext 'Data Source=.;Initial Catalog=BikeStores522;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False' Microsoft.EntityFrameworkCore.SqlServer -Schemas sales, production -DataAnnotations -Context 'ApplicationDbContext' -ContextDir Data -OutputDir Models
