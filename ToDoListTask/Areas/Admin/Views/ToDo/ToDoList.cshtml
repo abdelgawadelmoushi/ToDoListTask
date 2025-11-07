@@ -1,4 +1,13 @@
-﻿@model List<ToDoList>
+﻿@model List<ToDoListTask.Models.ToDoList>
+
+<h1>welcome to your ToDos @ViewBag.UserName</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div id="notification" class="alert alert-success text-center">
+        @TempData["Message"]
+    </div>
+}
 
 <div class="container">
 
@@ -24,7 +33,7 @@
                         <td class="font-monospace">
                             @if (!string.IsNullOrEmpty(item.File))
                             {
-                                <a href="~/Files/ToDos_Files/@item.File)" target="_blank" class="btn btn-sm btn-info">View</a>
+                                <a href="~/Files/ToDos_Files/@item.File" target="_blank" class="btn btn-sm btn-info">View</a>
                                 <a asp-area="Admin" asp-controller="ToDo" asp-action="DownloadFile" asp-route-id="@item.Id"
                                    class="btn btn-sm btn-success"> Download </a>
                                                     }
@@ -49,3 +58,15 @@
     </div>
 
 </div>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        const notification = document.getElementById("notification");
+        if (notification) {
+            setTimeout(() => {
+                notification.style.transition = "opacity 0.5s ease";
+                notification.style.opacity = "0";
+                setTimeout(() => notification.remove(), 500);
+            }, 6000); // 6 seconds
+        }
+    });
+</script>

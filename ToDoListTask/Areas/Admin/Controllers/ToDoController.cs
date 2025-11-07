@@ -10,18 +10,28 @@ namespace ToDoListTask.Areas.Admin.Controllers
     {
         ApplicationDbContext _context = new ();
 
+        [HttpGet]
         public IActionResult ToDoList()
         {
-            var ToDoLists = _context.toDoLists.AsQueryable().OrderByDescending(t => t.Deadline);
+            var toDoLists = _context.toDoLists
+                .AsQueryable()
+                .OrderByDescending(t => t.Deadline)
+                .ToList();
 
-            return View(ToDoLists.ToList());
+            ViewBag.UserName = Request.Cookies["UserName"];
+
+            return View(toDoLists);
         }
+
+
+    
 
         [HttpGet]
         public IActionResult AddToDo()
         {
+            TempData["Message"] = "✅ Todo added successfully!";
 
-           return View(new ToDoList());
+            return View(new ToDoList());
         }
      
         [HttpPost]

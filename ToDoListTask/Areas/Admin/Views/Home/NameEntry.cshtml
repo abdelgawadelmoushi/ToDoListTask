@@ -1,0 +1,17 @@
+﻿
+<form asp-action="NameEntry" method="post">
+    <div class="mb-3">
+
+
+        <label for="Name" class="form-label">Enter Your Name</label>
+        <input type="text" name="Name" class="form-control" id="Name">
+
+        </div>
+
+    <button type="submit"   class="btn btn-primary">Submit</button>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

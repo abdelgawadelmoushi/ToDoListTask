@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ToDoListTask.Validations;
 
 namespace ToDoListTask.Models
 {
@@ -6,12 +7,15 @@ namespace ToDoListTask.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="This field is required") , MinLength(4) , MaxLength(50)]
+
+        [Required , CustomLength]
         public string Title { get; set; }=string.Empty;
 
-        [MinLength(5)]
+        [CustomLength]
         public string Discreption { get; set; } = string.Empty;
         public string File { get; set; } = "default.txt";
+
+     
         public DateTime Deadline { get; set; }  
 
 

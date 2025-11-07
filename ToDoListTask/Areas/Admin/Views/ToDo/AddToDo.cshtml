@@ -23,8 +23,10 @@
 
             <div class="mb-3">
         <label asp-for="Deadline" class="form-label">Deadline</label>
-        <input asp-for="Deadline"  type="datetime-local" class="form-control" required />
+                <input asp-for="Deadline" type="datetime-local" class="form-control" required 
+                value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
         <span asp-validation-for="Deadline" class="text-danger"></span>
+
 
             </div>
             <div class="mb-3">

@@ -6,6 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Home\presentation.cshtml" />
+    <Content Remove="Areas\Admin\Views\Home\template.cshtml" />
+  </ItemGroup>
+
 
 
 	<ItemGroup>
@@ -22,5 +27,13 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\Files\ToDos_Files\" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+	  <None Include=".github\workflows\main.yml" />
+	  <None Include="Areas\Admin\Views\Home\presentation.cshtml" />
+	  <None Include="Areas\Admin\Views\Home\template.cshtml" />
 	</ItemGroup>
 </Project>
